@@ -56,8 +56,10 @@ class _HomePageState extends State<HomePage> {
               return new AddContact();
             },
             fullscreenDialog: true));
-    setState(() {
-      _contactList.add(data);
-    });
+    if (data != null) {
+      setState(() {
+        _contactList.add(data);
+      });
+    }
   }
 }
