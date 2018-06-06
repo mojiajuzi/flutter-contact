@@ -38,19 +38,19 @@ class Contact {
   Contact();
 
   Contact.fromMap(Map<String, dynamic> map) {
-    map.forEach((k, item) {
-      item = item;
-    });
+    // map.forEach((k, item) {
+    //   item = item;
+    // });
 
-    // name = map["name"];
-    // nickName = map["nickName"];
-    // phone = map["phone"];
-    // email = map["email"];
-    // company = map["company"];
-    // department = map["department"];
-    // designation = map["designation"];
-    // address = map["address"];
-    // logo = map["logo"];
+    name = map["name"];
+    nickName = map["nickName"];
+    phone = map["phone"];
+    email = map["email"];
+    company = map["company"];
+    department = map["department"];
+    designation = map["designation"];
+    address = map["address"];
+    logo = map["logo"];
   }
 }
 

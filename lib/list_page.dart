@@ -66,16 +66,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getRow(int index) {
-    return new FlatButton(
-      child: new ListTile(
-        title: new Text(_contactList[index].name),
-        trailing: new Text(_contactList[index].email),
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            leading: const Icon(Icons.face),
+            title: new Text(_contactList[index].name),
+            subtitle: new Text(_contactList[index].phone),
+          ),
+          new Divider(),
+          new ButtonTheme.bar(
+            // make buttons use the appropriate styles for cards
+            child: new ButtonBar(
+              children: <Widget>[
+                new FlatButton(
+                  child: const Text('展开'),
+                  onPressed: () {/* ... */},
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      onPressed: () {
-        setState(() {
-          _contactList.removeAt(index);
-        });
-      },
     );
   }
 
