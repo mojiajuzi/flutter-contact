@@ -115,7 +115,7 @@ class _AddContactState extends State<AddContact> {
               icon: const Icon(Icons.card_giftcard),
               labelText: '职位:',
             ),
-            onSaved: (val) => newContact.department = val,
+            onSaved: (val) => newContact.designation = val,
           ),
         ],
       ),

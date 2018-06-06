@@ -1,0 +1,4 @@
+#Thu Jun 07 00:03:52 CST 2018
+base.0=/home/gru/flutterWorkspace/flutter-contact/build/app/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

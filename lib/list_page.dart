@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'detail_contact.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage> {
       body: new ListView.builder(
         itemCount: _contactList.length,
         itemBuilder: (BuildContext context, int index) {
-          return getRow(index);
+          return getRow(context, index);
         },
       ),
       floatingActionButton: new FloatingActionButton(
@@ -65,24 +67,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget getRow(int index) {
+  Widget getRow(BuildContext context, int index) {
     return new Card(
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
-            leading: const Icon(Icons.face),
-            title: new Text(_contactList[index].name),
+            leading: new FlutterLogo(size: 50.0,),
+            title: new Text(
+              _contactList[index].name,
+              style: new TextStyle(fontSize:22.0, fontWeight: FontWeight.bold),
+              ),
             subtitle: new Text(_contactList[index].phone),
           ),
           new Divider(),
           new ButtonTheme.bar(
             // make buttons use the appropriate styles for cards
             child: new ButtonBar(
+              alignment: MainAxisAlignment.start,
               children: <Widget>[
                 new FlatButton(
-                  child: const Text('展开'),
-                  onPressed: () {/* ... */},
+                  child: const Text('详情'),
+                  onPressed:() => _showContactDetail(context, index),
                 ),
               ],
             ),
@@ -104,6 +110,22 @@ class _HomePageState extends State<HomePage> {
       contactProvider.insertContact(data);
       setState(() {
         _contactList.add(data);
+      });
+    }
+  }
+
+  Future _showContactDetail(BuildContext context, int index) async {
+    Contact data =
+        await Navigator.of(context).push(new MaterialPageRoute<Contact>(
+            builder: (BuildContext context) {
+              return new DetailContact(contact: _contactList[index]);
+            },
+            fullscreenDialog: true));
+    if (data != null) {
+      // 添加联系人
+      contactProvider.updateContact(data);
+      setState(() {
+        _contactList[index] = data;
       });
     }
   }
