@@ -65,18 +65,23 @@ class _AddContactState extends State<AddContact> {
           new TextFormField(
             decoration: const InputDecoration(
               icon: const Icon(Icons.person),
-              hintText: 'Enter your first and last name',
-              labelText: 'Name',
+              hintText: '请输入用户名',
+              labelText: '姓名:',
             ),
-            validator: (val) => val.isEmpty ? 'Name is required' : null,
+            validator: (val) => val.isEmpty ? '姓名不能为空' : null,
             onSaved: (val) => newContact.name = val,
-            onFieldSubmitted: (val) {},
+          ),
+          new TextFormField(
+            decoration: const InputDecoration(
+              icon: const Icon(Icons.person),
+              labelText: '英文名:',
+            ),
+            onSaved: (val) => newContact.nickName = val,
           ),
           new TextFormField(
             decoration: const InputDecoration(
               icon: const Icon(Icons.phone),
-              hintText: 'Enter a phone number',
-              labelText: 'Phone',
+              labelText: '手机号',
             ),
             keyboardType: TextInputType.phone,
             inputFormatters: [
@@ -86,12 +91,31 @@ class _AddContactState extends State<AddContact> {
           ),
           new TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.email),
-              hintText: 'Enter a email address',
-              labelText: 'Email',
+              icon: const Icon(Icons.business),
+              labelText: '企业:',
             ),
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (val) => newContact.email = val,
+            onSaved: (val) => newContact.company = val,
+          ),
+          new TextFormField(
+            decoration: const InputDecoration(
+              icon: const Icon(Icons.home),
+              labelText: '企业地址:',
+            ),
+            onSaved: (val) => newContact.address = val,
+          ),
+          new TextFormField(
+            decoration: const InputDecoration(
+              icon: const Icon(Icons.card_giftcard),
+              labelText: '部门:',
+            ),
+            onSaved: (val) => newContact.department = val,
+          ),
+          new TextFormField(
+            decoration: const InputDecoration(
+              icon: const Icon(Icons.card_giftcard),
+              labelText: '职位:',
+            ),
+            onSaved: (val) => newContact.department = val,
           ),
         ],
       ),
