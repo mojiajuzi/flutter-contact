@@ -92,6 +92,13 @@ class _AddContactState extends State<AddContact> {
           new TextFormField(
             decoration: const InputDecoration(
               icon: const Icon(Icons.business),
+              labelText: '邮箱:',
+            ),
+            onSaved: (val) => newContact.email = val,
+          ),
+          new TextFormField(
+            decoration: const InputDecoration(
+              icon: const Icon(Icons.business),
               labelText: '企业:',
             ),
             onSaved: (val) => newContact.company = val,

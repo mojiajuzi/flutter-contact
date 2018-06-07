@@ -8,7 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'detail_contact.dart';
 
-
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -68,31 +67,53 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getRow(BuildContext context, int index) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle titleStyle =
+        theme.textTheme.headline.copyWith(color: Colors.white);
+    final TextStyle descriptionStyle = theme.textTheme.subhead;
+
+    ShapeBorder _shap = RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(const Radius.circular(8.0)));
+
     return new Card(
+      margin:
+          const EdgeInsets.only(top: 8.0, left: 5.0, right: 5.0, bottom: 10.0),
+      shape: _shap,
       child: new Column(
-        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new ListTile(
-            leading: new FlutterLogo(size: 50.0,),
-            title: new Text(
-              _contactList[index].name,
-              style: new TextStyle(fontSize:22.0, fontWeight: FontWeight.bold),
-              ),
-            subtitle: new Text(_contactList[index].phone),
-          ),
-          new Divider(),
-          new ButtonTheme.bar(
-            // make buttons use the appropriate styles for cards
-            child: new ButtonBar(
-              alignment: MainAxisAlignment.start,
+          new SizedBox(
+            height: 184.0,
+            child: new Stack(
               children: <Widget>[
-                new FlatButton(
-                  child: const Text('详情'),
-                  onPressed:() => _showContactDetail(context, index),
+                new Positioned.fill(
+                  child: new Image.asset(
+                    'images/hello.jpeg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ],
             ),
           ),
+          new Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new ListTile(
+                leading: new CircleAvatar(
+                  backgroundImage: new NetworkImage(
+                    'https://assets3.thrillist.com/v1/image/2712821/size/gn-gift_guide_variable_c.jpg',
+                  ),
+                ),
+                title: new Text(
+                  _contactList[index].name,
+                  style: new TextStyle(fontSize: 18.0),
+                ),
+                subtitle: new Text(_contactList[index].phone),
+                onTap: () => _showContactDetail(context, index),
+              ),
+            ],
+          )
         ],
       ),
     );
